@@ -1,0 +1,87 @@
+html {
+  margin: 0;
+  padding: 0;
+  font-size: 1.6rem;
+  font-size: 62.5%;
+}
+body {
+  font-weight: normal;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.6rem;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+input,
+select,
+textarea,
+button {
+  outline: none;
+  font-size: 1.6rem;
+  font-weight: normal;
+  font-family: "Poppins", sans-serif;
+}
+
+textarea {
+  resize: none;
+}
+button {
+  cursor: pointer;
+}
+label,
+input {
+  font-size: 1.6rem;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 0;
+}
+table {
+  // border-collapse: collapse;
+  // border-spacing: 0;
+}
+$primaryColor: #fc556f;
+$secondaryColor: #fd9c84;
+$blueColor: #42a7fe;
+$greenColor: #00c899;
+@mixin flexbox(
+  $align: flex-start,
+  $justify: flex-start,
+  $flex-direction: row,
+  $wrap: nowrap
+) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $flex-direction;
+  flex-wrap: $wrap;
+}
+@mixin size($width: width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+// 16/9 -> x:y -> y/x * 100% = value ?(use for padding-bottom
+
+@mixin responsiveMedia($x, $y) {
+  $bottom: unquote(($y/$x) * 100 + "%");
+  padding-bottom: $bottom;
+}
+.responsive-video,
+.responsive-image {
+  position: relative;
+  height: 0;
+  // padding-bottom: calc(var(--video-rato) * 100%);
+  @include responsiveMedia(16, 9);
+  & iframe,
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include size(100%);
+    object-fit: fill;
+  }
+  img {
+    object-fit: cover;
+  }
+}
